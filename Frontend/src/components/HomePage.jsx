@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ const HomePage = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5173/recipe") // This will change to the backend URL ('http://your-django-api-endpoint/recipes/')
+            .get("http://localhost:5173/recipe") // This will change to the backend URL ('http://django-api-endpoint/recipes/')
             .then((response) => {
                 setRecipes(response.data);
             })
