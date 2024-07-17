@@ -8,8 +8,9 @@ const HomePage = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5173/recipe") // This will change to the backend URL ('http://django-api-endpoint/recipes/')
+            .get('http://127.0.0.1:8000/api/recipes/') // This will change to the backend URL ('http://django-api-endpoint/recipes/')
             .then((response) => {
+                console.log(response.data);
                 setRecipes(response.data);
             })
             .catch((error) => {
@@ -19,11 +20,11 @@ const HomePage = () => {
 
     return (
         <div>
-            <h1>Kangacook Lite</h1>
+            <h1>Recipes</h1>
             <ul>
                 {recipes.map(recipe => (
                     <li key={recipe.id}>
-                        <Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link>
+                        <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
                     </li>
                 ))}
             </ul>

@@ -9,8 +9,9 @@ const RecipeDetail = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5173/recipe/${id}`)
+            .get(`http://127.0.0.1:8000/api/recipes/${id}/`)
             .then((response) => {
+                console.log(response.data); // Log the response to check the format
                 setRecipe(response.data);
             })
             .catch((error) => {
@@ -27,7 +28,7 @@ const RecipeDetail = () => {
             <h1>{recipe.name}</h1>
             <p>{recipe.description}</p>
             <h2>Ingredients</h2>
-            <ul>{recipe.ingredients.map((ingredient, index) => (<li key={index}>{ingredient}</li>))}</ul>
+            <ul>{recipe.ingredients.split(', ').map((ingredient, index) => (<li key={index}>{ingredient}</li>))}</ul> {/* in the initial data model, the ingredients were stored as a comma-separated string. This helps me place it as an Array*/}
             <h2>Preparation Steps</h2>
             <p>{recipe.steps}</p>
         </div>
