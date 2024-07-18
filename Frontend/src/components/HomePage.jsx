@@ -22,12 +22,12 @@ const HomePage = () => {
     return (
         <div>
             <h1>Recipes</h1>
+            
             <Link to="/recipes/new">Create New Recipe</Link>
             <ul>
                 {recipes.map(recipe => (
                     <li key={recipe.id}>
                         <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-                        <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>
                     </li>
                 ))}
             </ul>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { createRecipe } from '../services/recipeService';
 
 // Creates a new recipe in the backend API on button click
 const CreateRecipe = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [recipe, setRecipe] = useState({ name: '', description: '', ingredients: '', steps: '' });
 
     // Updates the recipe state with the new value of the input field.
@@ -18,7 +18,7 @@ const CreateRecipe = () => {
         e.preventDefault();
         try {
             await createRecipe(recipe);
-            history.push('/');
+            navigate('/recipes');
         } catch (error) {
             console.error('There was an error creating the recipe!', error);
         }

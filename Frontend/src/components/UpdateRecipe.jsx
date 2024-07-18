@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getRecipeById, updateRecipe } from '../services/recipeService';
 
 // Renders a form to update a recipe. Fetches the recipe by ID and updates it with the provided data.
 const UpdateRecipe = () => {
     const { id } = useParams();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [recipe, setRecipe] = useState({ name: '', description: '', ingredients: '', steps: '' });
 
     // Fetches a recipe from the backend API based on the provided ID and updates the recipe state.
@@ -32,7 +32,7 @@ const UpdateRecipe = () => {
         e.preventDefault();
         try {
             await updateRecipe(id, recipe);
-            history.push('/');
+            navigate(`/recipes/${id}`);
         } catch (error) {
             console.error('There was an error updating the recipe!', error);
         }
@@ -77,6 +77,7 @@ const UpdateRecipe = () => {
                     required
                 />
             </div>
+            <button onClick={() => navigate(`/recipes`)}>Cancel</button>
             <button type="submit">Update Recipe</button>
         </form>
     );

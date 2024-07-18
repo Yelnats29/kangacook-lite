@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getRecipeById, deleteRecipe } from "../services/recipeService";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 //  Fetches a recipe based on the provided ID and updates the recipe state.
 const RecipeDetail = () => {
     const { id } = useParams();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [recipe, setRecipe] = useState(null);
 
     // Fetches a recipe from the backend API based on the provided ID.
@@ -29,7 +29,7 @@ const RecipeDetail = () => {
     const handleDelete = async () => {
         try {
             await deleteRecipe(id);
-            history.push('/');
+            navigate('/recipes');
         } catch (error) {
             console.error('There was an error deleting the recipe!', error);
         }
@@ -44,7 +44,8 @@ const RecipeDetail = () => {
             <ul>{recipe.ingredients.split(', ').map((ingredient, index) => (<li key={index}>{ingredient}</li>))}</ul> {/* in the initial data model, the ingredients were stored as a comma-separated string. This helps me place it as an Array*/}
             <h2>Preparation Steps</h2>
             <p>{recipe.steps}</p>
-            <button onClick={() => history.push(`/recipes/edit/${recipe.id}`)}>Edit Recipe</button>
+            <button onClick={() => navigate(`/recipes`)}>Back</button>
+            <button onClick={() => navigate(`/recipes/edit/${recipe.id}`)}>Edit Recipe</button>
             <button onClick={handleDelete}>Delete Recipe</button>
         </div>
     );
