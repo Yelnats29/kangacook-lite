@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createRecipe } from '../services/recipeService';
 
 // Creates a new recipe in the backend API on button click

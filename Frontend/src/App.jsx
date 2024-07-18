@@ -14,14 +14,14 @@ const App = () => {
 
   return (
     <>
-    <Nav />
-    <Routes>
-      <Route path="/" element={<WelcomePage />} />
-      <Route path="/recipes" element={<HomePage />} />
-      <Route path="/recipes/new" element={<CreateRecipe />} />
-      <Route path="/recipes/edit/:id" element={<UpdateRecipe />} />
-      <Route path="/recipes/:id" element={<RecipeDetail />} />
-    </Routes>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/recipes" element={<HomePage />} />
+        <Route path="/recipes/new" element={<CreateRecipe />} />
+        <Route path="/recipes/edit/:id" element={<UpdateRecipe />} />
+        <Route path="/recipes/:id" element={<RecipeDetail />} />
+      </Routes>
     </>
   );
 }
