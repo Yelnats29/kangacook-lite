@@ -39,47 +39,56 @@ const UpdateRecipe = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={recipe.name}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea
-                    name="description"
-                    value={recipe.description}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-                <label>Ingredients</label>
-                <textarea
-                    name="ingredients"
-                    value={recipe.ingredients}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-                <label>Steps</label>
-                <textarea
-                    name="steps"
-                    value={recipe.steps}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <button onClick={() => navigate(`/recipes`)}>Cancel</button>
-            <button type="submit">Update Recipe</button>
-        </form>
+        <div className="container mt-4">
+            <h1 className="text-center mb-4">Update Recipe</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label className="form-label">Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        value={recipe.name}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Description</label>
+                    <textarea
+                        name="description"
+                        className="form-control"
+                        value={recipe.description}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Ingredients</label>
+                    <textarea
+                        name="ingredients"
+                        className="form-control"
+                        value={recipe.ingredients}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Steps</label>
+                    <textarea
+                        name="steps"
+                        className="form-control"
+                        value={recipe.steps}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="d-flex justify-content-between">
+                    <button type="button" className="btn btn-secondary" onClick={() => navigate(`/recipes`)}>Cancel</button>
+                    <button type="submit" className="btn btn-primary">Update Recipe</button>
+                </div>
+            </form>
+        </div>
     );
 };
 

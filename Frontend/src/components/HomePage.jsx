@@ -32,18 +32,25 @@ const HomePage = () => {
     );
 
     return (
-        <div>
-            <h1>Recipes</h1>
+        <div className="container mt-4">
+            <h1 className="text-center mb-4">Recipes</h1>
             <SearchBar onSearch={searchInput} results={handleSearch} />
-            <ul>
+            <div className="row">
                 {filteredRecipes.map(recipe => (
-                    <li key={recipe.id}>
-                        <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-                    </li>
+                    <div key={recipe.id} className="col-sm-12 col-md-6 col-lg-4 mb-4">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">{recipe.name}</h5>
+                                <Link to={`/recipes/${recipe.id}`} className="btn btn-primary">
+                                    View Recipe
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
-    )
+    );
 }
 
 export default HomePage
