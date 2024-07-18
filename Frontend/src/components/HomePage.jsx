@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getRecipes } from '../services/recipeService';
+import SearchBar from './SearchBar/searchBar';
 
 // Renders the HomePage component, which fetches a list of recipes from a backend API and displays them in a list.
 const HomePage = () => {
     const [recipes, setRecipes] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
 
     // Fetches recipes from the server and updates the state.
     useEffect(() => {
@@ -19,13 +21,22 @@ const HomePage = () => {
         fetchRecipes();
     }, []);
 
+    // Handles search input changes and updates the state.
+    const handleSearch = (search) => {
+        setSearchInput(search);
+    };
+
+    // Filters recipes based on the search input.
+    const filteredRecipes = recipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
     return (
         <div>
             <h1>Recipes</h1>
-            
-            <Link to="/recipes/new">Create New Recipe</Link>
+            <SearchBar onSearch={searchInput} results={handleSearch} />
             <ul>
-                {recipes.map(recipe => (
+                {filteredRecipes.map(recipe => (
                     <li key={recipe.id}>
                         <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
                     </li>
