@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { createRecipe } from '../services/recipeService';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { getRecipeById, updateRecipe } from '../services/recipeService';
 
-// Creates a new recipe in the backend API on button click
-const CreateRecipe = () => {
+// Renders a form to update a recipe. Fetches the recipe by ID and updates it with the provided data.
+const UpdateRecipe = () => {
+    const { id } = useParams();
     const history = useHistory();
     const [recipe, setRecipe] = useState({ name: '', description: '', ingredients: '', steps: '' });
+
+    // Fetches a recipe from the backend API based on the provided ID and updates the recipe state.
+    useEffect(() => {
+        const fetchRecipe = async () => {
+            try {
+                const data = await getRecipeById(id);
+                setRecipe(data);
+            } catch (error) {
+                console.error('There was an error fetching the recipe!', error);
+            }
+        };
+        fetchRecipe();
+    }, [id]);
 
     // Updates the recipe state with the new value of the input field.
     const handleChange = (e) => {
@@ -13,16 +27,15 @@ const CreateRecipe = () => {
         setRecipe({ ...recipe, [name]: value });
     };
 
-    // Creates a new recipe in the backend API on button click
+    // Updates an existing recipe in the backend API on button click.
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createRecipe(recipe);
+            await updateRecipe(id, recipe);
             history.push('/');
         } catch (error) {
-            console.error('There was an error creating the recipe!', error);
+            console.error('There was an error updating the recipe!', error);
         }
-        setRecipe('');
     };
 
     return (
@@ -64,9 +77,9 @@ const CreateRecipe = () => {
                     required
                 />
             </div>
-            <button type="submit">Create Recipe</button>
+            <button type="submit">Update Recipe</button>
         </form>
     );
 };
 
-export default CreateRecipe;
+export default UpdateRecipe;
