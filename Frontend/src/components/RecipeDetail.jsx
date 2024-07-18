@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { getRecipeById } from "../services/recipeService";
 import { useParams } from "react-router-dom";
 
 //  Fetches a recipe based on the provided ID and updates the recipe state.
@@ -8,15 +8,15 @@ const RecipeDetail = () => {
     const [recipe, setRecipe] = useState(null);
 
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/recipes/${id}/`)
-            .then((response) => {
-                console.log(response.data); // Log the response to check the format
-                setRecipe(response.data);
-            })
-            .catch((error) => {
-                console.log('There was an error fetching the recipe', error);
-            });
+        const fetchRecipe = async () => {
+            try {
+                const data = await getRecipeById(id);
+                setRecipe(data);
+            } catch (error) {
+                console.error('There was an error fetching the recipe!', error);
+            }
+        };
+        fetchRecipe();
     }, [id]);
 
     if (!recipe) {
