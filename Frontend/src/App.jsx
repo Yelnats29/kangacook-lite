@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import RecipeDetail from './components/RecipeDetail';
 import CreateRecipe from './components/CreateRecipe';
 import UpdateRecipe from './components/UpdateRecipe';
+import './App.css';
 
 // The App component renders the HomePage component as the default route. It also defines the routes for the other components.
 const App = () => {
