@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}api/recipes/`;
+const API_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
 
 // Fetches a list of recipes from the backend API.
 export const getRecipes = async () => {
