@@ -53,7 +53,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://d1wcq1esmt7w6s.cloudfront.net",
+    "http://localhost:8000",  # for local development
+]
+
 
 ROOT_URLCONF = 'kangacook_backend.urls'
 
